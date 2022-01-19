@@ -15,7 +15,7 @@ const Registeration = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      let { response, responseSecond } = await RegisterationHandler(
+      let response = await RegisterationHandler(
         userName.current.value,
         passWord.current.value,
         firstName.current.value,
@@ -23,14 +23,18 @@ const Registeration = () => {
         yourLocation.current.value,
         mobileNo.current.value
       );
-      // console.log(response);
-      // console.log(responseSecond);
-      if (response.statusText === "OK") {
+      console.log( await response);
+      // console.log( responseSecond);
+      if (response.status ===200) {
         alert("Register successfully Please Login to Continue");
         navigate("/login", { replace: true });
-      } else {
+        return
+      }
+      else{
         alert("Email already used try with another mail ");
       }
+        
+      
     } catch (error) {
       // console.log("in catch");
       // console.log(error);

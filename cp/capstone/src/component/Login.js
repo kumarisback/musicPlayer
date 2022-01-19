@@ -25,8 +25,9 @@ const Login = (props) => {
           userName.current.value,
           passWord.current.value
         );
-        if (res.statusText === "OK") {
-          // console.log(res.data);
+        console.log(res);
+        if (res.data.registered) {
+          console.log(res.data);
           alert("Login Successfully");
           navigate("/", { replace: true });
           props.authHandle({ auth: true, email: res.data.email });
