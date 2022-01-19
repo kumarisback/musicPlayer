@@ -13,6 +13,7 @@ const RegisterationHandler = async (
 ) => {
   if ((email && passWord) != null) {
     try {
+      console.log("hi");
       const response = await axios.post(
         url,
         {
@@ -22,6 +23,7 @@ const RegisterationHandler = async (
         },
         { headers: { "Content-Type": "application/json" } }
       );
+      console.log(await response.data+"---");
 
       const responseSecond = await axios.post(
         urlForData,
@@ -35,10 +37,10 @@ const RegisterationHandler = async (
         },
         { headers: { "content-type": "application/json" } }
       );
-
-      return { response, responseSecond };
+      console.log(response);
+      return  response ;
     } catch (error) {
-      // console.log(error.response);
+      console.log("ji");
       return error.response;
     }
   }
