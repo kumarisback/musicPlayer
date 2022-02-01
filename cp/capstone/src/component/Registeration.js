@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import RegisterationHandler from "../DatabaseHandler/RegisterationHandler";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import usePrompt from './promtp'
+
 
 const Registeration = () => {
   const userName = useRef("");
@@ -11,9 +13,13 @@ const Registeration = () => {
   const yourLocation = useRef("");
   const mobileNo = useRef("");
   let navigate = useNavigate();
+  let loc =useLocation();
+  const [intial, setIntial] = useState(false);
 
+  
   const submitHandler = async (e) => {
     e.preventDefault();
+    setIntial(false);
     try {
       let response = await RegisterationHandler(
         userName.current.value,
@@ -40,9 +46,21 @@ const Registeration = () => {
       // console.log(error);
     }
   };
+   
+  const call=()=>{
+    // console.log(e.target.value);
+    console.log(intial);
+    return intial
+  }
+  usePrompt(
+    "Are you sure you want to leave?",
+    call())
 
+  console.log(intial);
   return (
-    <Form className="form" onSubmit={submitHandler}>
+    <>
+    
+    <Form className="form" data-testid="abc" onSubmit={submitHandler}   onChange={()=>{setIntial(true);}}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -99,6 +117,8 @@ const Registeration = () => {
         Submit
       </Button>
     </Form>
+   
+    </>
   );
 };
 

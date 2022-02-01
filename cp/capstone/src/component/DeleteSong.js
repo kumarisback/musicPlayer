@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef ,useState} from "react";
 import { Form, Button } from "react-bootstrap";
 import { editSong } from "../DatabaseHandler/SongHandler";
 import { useLocation, useNavigate } from "react-router-dom";
+import usePrompt from './promtp'
 
 const DeleteSong = () => {
   let loc = useLocation();
@@ -13,6 +14,17 @@ const DeleteSong = () => {
   const length = useRef(loc.state[1].Length);
   const songURL = useRef(loc.state[1].Song_URL);
   let navigate = useNavigate();
+
+  const [intial, setIntial] = useState(false);
+
+  const call=()=>{
+    // console.log(e.target.value);
+    console.log(intial);
+    return intial
+  }
+  usePrompt(
+    "Are you sure you want to leave?",
+    call())
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -43,7 +55,7 @@ const DeleteSong = () => {
   };
 
   return (
-    <Form className="form" onSubmit={submitHandler}>
+    <Form className="form" onSubmit={submitHandler} onChange={()=>{setIntial(true)}}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Song Title</Form.Label>
         <Form.Control

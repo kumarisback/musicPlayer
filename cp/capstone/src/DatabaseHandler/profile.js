@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
-
-const urlForData = `https://capstone-4fc07-default-rtdb.firebaseio.com/users.json?key=${process.env.REACT_APP_KEY}`;
+import { db } from '../Data/AllUrl';
+const urlForData = `${db}users.json?key=$AIzaSyB8P3OPwlMQkaJYwBLQB0_4ZxpxuKutlrE`;
 const getProfile = async(user) => {
     // console.log(user);
     try{

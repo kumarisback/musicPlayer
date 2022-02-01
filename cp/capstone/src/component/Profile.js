@@ -40,7 +40,7 @@ const Profile = () => {
         />
       ) : (
         <div>
-          <h2  className='profile-head' >User Profile </h2>
+          <h2  className='profile-head' > Profile </h2>
 
           <div className="profile-card">
             <svg

@@ -23,7 +23,7 @@ const RegisterationHandler = async (
         },
         { headers: { "Content-Type": "application/json" } }
       );
-      console.log(await response.data+"---");
+      console.log( response.data);
 
       const responseSecond = await axios.post(
         urlForData,
@@ -37,7 +37,7 @@ const RegisterationHandler = async (
         },
         { headers: { "content-type": "application/json" } }
       );
-      console.log(response);
+      console.log(await responseSecond.data);
       return  response ;
     } catch (error) {
       console.log("ji");

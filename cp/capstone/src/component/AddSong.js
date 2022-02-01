@@ -1,12 +1,14 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef,useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { addSong } from "../DatabaseHandler/SongHandler";
 import { useNavigate } from "react-router-dom";
 import { isAuth } from "../Data/auth";
+import usePrompt from "./promtp";
 
 
 const AddSong = () => {
 
+  const [intial, setIntial] = useState(false);
   const data= useContext(isAuth);
   const songTitle = useRef("");
   const albumName = useRef("");
@@ -43,9 +45,17 @@ const AddSong = () => {
       // console.log(error);
     }
   };
+  const call=()=>{
+    // console.log(e.target.value);
+    console.log(intial);
+    return intial
+  }
 
+  usePrompt(
+    "Are you sure you want to leave?",
+    call())
   return (
-    <Form className="form" onSubmit={submitHandler}>
+    <Form className="form" onSubmit={submitHandler} onChange={()=>{setIntial(true);}}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Song Title</Form.Label>
         <Form.Control

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { db, songUrl } from "../Data/AllUrl";
 
-const url = `https://capstone-4fc07-default-rtdb.firebaseio.com/songs.json?key=${process.env.REACT_APP_KEY}`;
+
 const addSong = async (...details) => {
   const data = {
     Song_title: details[0],
@@ -41,6 +41,7 @@ const FetchSong = async () => {
     let response = await axios.get(songUrl, {
       headers: { "Content-Type": "application/json" },
     });
+    // console.log(await response.data);
     return await response.data;
   } catch (error) {
     // console.log(error);
@@ -194,11 +195,10 @@ const fetchMySong = async (user) => {
       `${db}${user}/mysong.json?key=${process.env.REACT_APP_KEY}`
     );
     // console.log(await response.data);
-    
 
     let temp = await response.data;
-    if(temp===null){
-      return null
+    if (temp === null) {
+      return null;
     }
     let key = Object.values(temp);
     if (key != null) {
@@ -228,37 +228,74 @@ const fetchMySong = async (user) => {
       });
 
       // console.log(song);
-      return  song;
+      return song;
+    } else {
+      return null;
     }
-    else{
-      return null
-    }
-
-    return await response.data;
   } catch (error) {
     console.log("in catch");
     return null;
   }
 };
 
-const searchSong=async(songName)=>{
-  let response=await FetchSong();
+const searchSong = async (songName) => {
+  let response = await FetchSong();
   // console.log(response);
-  let songs= Object.entries(response);
-  let song;
-   songs.forEach(x=>{
-     if(x[1].Song_title.toLowerCase()===songName.toLowerCase()){
+  let songs = Object.entries(response);
+  let song=[];
+  songs.forEach((x) => {
+    if (x[1].Song_title.toLowerCase().includes(songName.toLowerCase()) ) {
       // console.log(x[1]);
-      song=x;
-      
+      song.push(x);
     }
-  })
-  if(song){
+  });
+  if (song) {
     return song;
   }
-// console.log("hi");
+  // console.log("hi");
   return null;
-}
+};
+
+const CreateNeWPlaylist = async (playListName, data,username) => {
+  console.log(data);
+  console.log(username);
+
+  try {
+    // let name = data.user.split("@");
+    // console.log(data, playListName);
+    // console.log(name[0]);
+    // return
+    // console.log(
+    //   `${db}/${name[0]}/${playListName}.json?key=${process.env.REACT_APP_KEY}`
+    // );
+
+    const response = await axios.post(
+      `${db}/${username}/playlist/${playListName}.json?key=${process.env.REACT_APP_KEY}`,
+      data,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    const temp = await axios.get(
+      `${db}/${username}/playlist/count.json?key=${process.env.REACT_APP_KEY}`,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    let resy= await temp.data;
+    resy[`${playListName}`]=0;
+    console.log(resy);
+
+    let kardoyrr=await axios.put(`${db}/${username}/playlist/count.json?key=${process.env.REACT_APP_KEY}`,resy);
+    // console.log("ji");
+    console.log(await response.data);
+    if (response) {
+      return true;
+    }
+    console.log(await response.data);
+    return false;
+  } catch (error) {
+    console.log("in catch");
+    return false;
+  }
+};
 
 export {
   addSong,
@@ -269,5 +306,6 @@ export {
   removeSongForAll,
   editSong,
   fetchMySong,
-  searchSong
+  searchSong,
+  CreateNeWPlaylist,
 };

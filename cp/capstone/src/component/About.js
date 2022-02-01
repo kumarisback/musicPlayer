@@ -22,6 +22,19 @@ const About = () => {
           alt="First slide"
         />
         <Carousel.Caption className="carousel-caption">
+          <h3>This is a music player</h3>
+          <p>Here you can create your own playlist and add song in it.
+            Login to explore 
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQwlNP4KJcgSK97C5L8FnxWLqbvA5iDmPI-w&usqp=CAU"
+          alt="First slide"
+        />
+        <Carousel.Caption className="carousel-caption">
           <h3>Share Playlists</h3>
           <p>Create and share your playlists with your friends.</p>
         </Carousel.Caption>

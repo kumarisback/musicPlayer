@@ -3,7 +3,7 @@
   
 }
 body{
-  background-image: url('https://images.pexels.com/photos/1254736/pexels-photo-1254736.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+  background-image: url('https://free4kwallpapers.com/uploads/originals/2021/01/20/music-wallpaper.jpg');
   background-size: cover;
 }
 
@@ -95,7 +95,9 @@ Form{
   width: 250px !important;
   /* min-width: 300px; */
   height: 500px;
-  height: fit-content !important
+  height: fit-content !important;
+  border-radius: 10px;
+  box-shadow: 5px 5px 3px black;
 }
 
 .loading{
@@ -116,13 +118,13 @@ Form{
   background-color: rgb(52, 173, 194) !important
 }
 
-.login{
+/* .login{
   display: flex ;
   position: absolute;
   right: 0;
   margin-right: 10px;
   
-}
+} */
 
 /* .profile{
   display: flex ;
@@ -142,23 +144,33 @@ Form{
   margin: auto;
   text-align: center;
   font-family: arial;
-  background-color: rgb(255, 166, 0,0.2);
+  /* background-color: rgb(255, 166, 0,0.2); */
   border-radius: 50px;
   font-family:fantasy;
   font-size: 20px;
+  background: linear-gradient(
+45deg
+, #fdfdfd26, #f9f1f173);
+    box-shadow: 10px 10px 10px beige;
 }
 
 .profile-head{
   text-align: center;
-  color: blue;
+  width: max-content;
+  margin: 20px auto;
+  color: #eaefea;
+  background: repeating-linear-gradient(
+    45deg
+    , #5a9d6e4d, #929b85 100px);
+    box-shadow: 3px 3px 5px black;
   /* background-color: gold;
    */
    background-color:rgb(255 ,215 ,0,0.3);
 
 
-  padding: 10px;
+  padding: 20px;
   border-radius: 20px;
-  margin: 20px;
+  /* margin: 20px; */
   font-size: 32px;
 }
 
@@ -169,4 +181,77 @@ Form{
 
 .notFound{
   color: black;
+}
+
+.filterData{
+  display:  flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.list-of-playlist{
+  margin:20px 10%;
+  padding: 30px 30px;
+  /* margin: 30px; */
+  background-color : rgb(138, 143, 138);
+  border-radius: 5px;
+  display: block;
+  
+}
+.list-of-playlist button{
+  background-color: rgb(165, 175, 155);
+  padding:  12px 30px;
+  width: 100%;
+  border-radius: 5px;
+}
+.list-of-playlist button:hover{
+  background-color: rgb(215, 233, 197);
+}
+.playlist-content{
+  list-style: none;
+  margin: 20px;
+}
+
+.loginside{
+  /* background-color: grey; */
+  display: flex;
+  justify-content: end;
+  /* padding: 10px; */
+  /* margin: 10px; */
+}
+
+.loginside a{
+  color: white;
+}
+
+.loginside a:hover{
+  font-size: large;
+  color: chartreuse;
+}
+
+.playlistDisplay{
+  margin-left: 600px;
+  background-color: rgb(206, 167, 153);
+  padding: 10px;
+  margin-top: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  width: max-content;
+  border-radius: 10px;
+}
+
+.donut{
+  height: 500px;
+  width: 500px;
+  margin:auto;
+  background: linear-gradient(45deg,#fff135,#919991);
+  box-shadow: 5px 2px 3px black;
+  padding: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.donut:hover{
+  transform: scale(1.05);
+  font-weight: 30px;
+  /* transition: cubic-bezier(1, 0, 0, 1); */
 }

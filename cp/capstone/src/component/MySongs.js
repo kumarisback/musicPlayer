@@ -95,9 +95,14 @@ const MySongs = () => {
                   Duration : {k[1].Length}
                   <br />
                 </Card.Text>
-                <Card.Link className="a" href={k[1].Song_URL} variant="primary">
-                  Go somewhere
-                </Card.Link>
+                <Card.Link
+                      className="a"
+                      target="_blank"
+                      href={k[1].Song_URL}
+                      variant="primary"
+                    >
+                      Go Play
+                    </Card.Link>
               </Card.Body>
             </Card>
           );
@@ -106,19 +111,14 @@ const MySongs = () => {
       {noSongs &&  (
         <section className="notFound">
           <div className="img">
-            hi
-            <img
-              src="https://assets.codepen.io/5647096/backToTheHomepage.png"
-              alt="Back to the Homepage"
-            />
             <img
               src="https://assets.codepen.io/5647096/Delorean.png"
               alt="El Delorean, El Doc y Marti McFly"
             />
           </div>
-          <div className="text">
+          <div className="text" style={{color:'red'}}>
             <h1>NO</h1>
-            <h2>SONG FOUND</h2>
+            <h2>SONG ADDED</h2>
           </div>
         </section>
       )}

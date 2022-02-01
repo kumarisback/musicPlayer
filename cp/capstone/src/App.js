@@ -3,7 +3,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./component/HomePage";
 import About from "./component/About";
-import Login from "./component/Login";
 import PlayList from "./component/PlayList";
 import Registeration from "./component/Registeration";
 import { Navbar, Nav, Container } from "react-bootstrap";
@@ -11,14 +10,23 @@ import AddSong from "./component/AddSong";
 import DeleteSong from "./component/DeleteSong";
 import Song from "./component/Song";
 import { isAuth } from "./Data/auth";
-import { Fragment, useState,useRef } from "react";
+import { Fragment, useState } from "react";
 import PageNotFound from "./component/pageNotFound";
 import Profile from "./component/Profile";
 import MySongs from "./component/MySongs";
+import NewPlaylist from "./component/newPlaylist";
+import ShowPlaylist from "./component/showPlaylist";
+import React ,{Suspense}from "react";
+// import ChartLine from "./component/chart";
+import ChartLine from "../src/component/chart"
+// import NewPlayListComp from "./component/NewPlayListComp";
+
+const NewPlayListComp=React.lazy(() => import("./component/NewPlayListComp"));
+const Login =React.lazy(() => import("./component/Login"));
 
 
 const App = () => {
-  const [user, setUser] = useState({ isLoggedIn: false, email: "" });
+  const [user, setUser] = useState({ isLoggedIn: true, email: "root@wipro.com" });
 
 
   const authHandle = (props) => {
@@ -51,7 +59,22 @@ const App = () => {
               {/*as={Link} to="/playlist" */}
               PlayList
             </Nav.Link>
-            <Nav.Link
+            <Nav.Link hidden={!user.isLoggedIn} as={Link} to="/mysong">
+              My Song
+            </Nav.Link>
+            
+            <Nav.Link as={Link} to="/song">
+              Add Song
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about">
+              About
+            </Nav.Link>
+            <Nav.Link as={Link} to="/graph">
+              Graph
+            </Nav.Link>
+          </Nav>
+          <div className="loginside">
+          <Nav.Link
               className="login"
               onClick={() => {
                 if (user.isLoggedIn) {
@@ -64,6 +87,7 @@ const App = () => {
                 else{
                   navigate("/login");
                 }
+                
               }}
               // as={Link}
               // to="/login"
@@ -83,19 +107,9 @@ const App = () => {
               as={Link}
               to="/profile"
             >
-              profile
+              {user?.email?.split('@')[0]}
             </Nav.Link>
-            <Nav.Link hidden={!user.isLoggedIn} as={Link} to="/mysong">
-              My Song
-            </Nav.Link>
-            
-            <Nav.Link as={Link} to="/song">
-              Songs
-            </Nav.Link>
-            <Nav.Link as={Link} to="/about">
-              About
-            </Nav.Link>
-          </Nav>
+          </div>
         </Container>
         
       </Navbar>
@@ -106,15 +120,20 @@ const App = () => {
 
           <Route index path="/" element={<HomePage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/playlist" element={<PlayList />} />
-          <Route path="/login" element={<Login authHandle={authHandle} />} />
+          <Route path="/playlist" element={<Suspense fallback={<div>Loading</div>}><NewPlayListComp /></Suspense>} />
+          <Route path="/login" element={ <Suspense fallback={<div>Loading</div>}>
+          <Login authHandle={authHandle} />
+			</Suspense>} />
           <Route path="/register" element={<Registeration />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/mysong" element={<MySongs />} />
+          <Route path="/newplaylist" element={<NewPlaylist />} />
+          <Route path="/showplaylist" element={<ShowPlaylist />} />
 
           <Route path="/song" element={<Song />} />
           <Route path="song/addsong" element={<AddSong />} />
           <Route path="song/editsong" element={<DeleteSong />} />
+          <Route path="graph" element={<ChartLine />} />
         </Routes>
       </isAuth.Provider>
     </Fragment>
